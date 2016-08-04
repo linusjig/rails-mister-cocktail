@@ -2,8 +2,12 @@
 
 
 <ul>
-<% @cocktail.doses.each do |dose| %>
-<li><%= dose.description %> <%= dose.ingredient.name %> <%= link_to 'Destroy', dose, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+<% @doses.each do |dose| %>
+<li>
+  <%= dose.description %>
+  <%= dose.ingredient.name %>
+  <%= link_to 'Destroy', dose, method: :delete, data: { confirm: 'Are you sure?' } %>
+</li>
 <% end %>
 </ul>
 

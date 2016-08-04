@@ -4,13 +4,20 @@ class DosesController < ApplicationController
   before_action :set_dose, only: [:destroy]
 
   def new
+    @doses = @cocktail.doses
     @dose = Dose.new
   end
 
   def create
-    @dose = @cocktail.doses.create(dose_params)
+    @doses = []
+    @cocktail.doses.select do |dose|
+      @doses << dose if dose.id.present?
+    end
+
+    @dose = @cocktail.doses.build(dose_params)
+
     if @dose.save
-      redirect_to cocktail_doses_path(@cocktail)
+      redirect_to new_cocktail_dose_path(@cocktail)
     else
       render :new
     end
