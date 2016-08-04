@@ -1,0 +1,19 @@
+<h2>Add Doses</h2>
+
+
+<ul>
+<% @cocktail.doses.each do |dose| %>
+<li><%= dose.description %> <%= dose.ingredient.name %> <%= link_to 'Destroy', dose, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+<% end %>
+</ul>
+
+<!-- Creating a dose in the scope of a cocktail -->
+<%= form_for [@cocktail, @dose] do |f| %>
+  <%= f.text_field :description %>
+  <%= f.select :ingredient_id, options_from_collection_for_select(Ingredient.all, 'id', 'name') %>
+  <%= f.submit %>
+<% end %>
+
+
+<%= link_to 'Back', cocktail_path(@cocktail) %>
+<%= link_to 'List of cocktails', cocktails_path %>
