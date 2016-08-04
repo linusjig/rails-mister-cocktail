@@ -1,11 +1,11 @@
 <%= simple_form_for(@cocktail) do |f| %>
   <%= f.error_notification %>
 
-  <div class="form-inputs">
-    <%= f.input :name %>
-  </div>
-
-  <div class="form-actions">
-    <%= f.button :submit %>
-  </div>
+  <%= f.label :name %>
+  <%= f.text_field :name, placeholder: "name" %>
+  <%= f.fields_for :doses do |d| %>
+    <%= d.text_field :description %>
+    <%= d.select :ingredient_id, options_from_collection_for_select(Ingredient.all, 'id', 'name') %>
+    <%= f.submit %>
+  <% end %>
 <% end %>
