@@ -1,27 +1,18 @@
-<p id="notice"><%= notice %></p>
+<div class="text-center">
+  <p id="notice"><%= notice %></p>
 
-<h1>Listing Cocktails</h1>
+  <h1>Listing Cocktails</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+  <h2>Name</h2>
 
-  <tbody>
-    <% @cocktails.each do |cocktail| %>
-      <tr>
-        <td><%= cocktail.name %></td>
-        <td><%= link_to 'Show', cocktail %></td>
-        <td><%= link_to 'Edit', edit_cocktail_path(cocktail) %></td>
-        <td><%= link_to 'Destroy', cocktail, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+  <% @cocktails.each do |cocktail| %>
+    <h3><%= cocktail.name %></h3>
+    <%= link_to 'Show', cocktail %></td>
+    <%= link_to 'Destroy', cocktail, method: :delete, data: { confirm: 'Are you sure?' } %>
+  <% end %>
 
-<br>
+  <br>
+  <hr/>
 
-<%= link_to 'New Cocktail', new_cocktail_path %>
+  <%= link_to 'New Cocktail', new_cocktail_path %>
+</div>

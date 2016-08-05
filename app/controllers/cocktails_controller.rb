@@ -15,10 +15,12 @@ class CocktailsController < ApplicationController
   # GET /cocktails/new
   def new
     @cocktail = Cocktail.new
+    @cocktail.doses.new
   end
 
   # GET /cocktails/1/edit
   def edit
+    @dose = Dose.new
   end
 
   # POST /cocktails
@@ -40,14 +42,12 @@ class CocktailsController < ApplicationController
   # PATCH/PUT /cocktails/1
   # PATCH/PUT /cocktails/1.json
   def update
-    respond_to do |format|
+
       if @cocktail.update(cocktail_params)
-        format.html { redirect_to @cocktail, notice: 'Cocktail was successfully updated.' }
-        format.json { render :show, status: :ok, location: @cocktail }
+        redirect_to @cocktail, notice: 'Cocktail was successfully updated.'
       else
-        format.html { render :edit }
-        format.json { render json: @cocktail.errors, status: :unprocessable_entity }
-      end
+        # @dose = @cocktail.doses.new
+        render :edit
     end
   end
 
@@ -69,6 +69,11 @@ class CocktailsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def cocktail_params
-      params.require(:cocktail).permit(:name)
+      # To save the nested params they need to be permited first (in form of a hash),
+      # key: doses_attributes, value: array with :description and ingredients_id. If there
+      # were more things nested, then anothre hash would be requiered inside of the
+      # array
+      # if the id is not passed in the array,
+      params.require(:cocktail).permit(:name, doses_attributes: [:description, :ingredient_id, :id ])
     end
 end

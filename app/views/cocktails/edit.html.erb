@@ -1,6 +1,41 @@
-<h1>Editing Cocktail</h1>
+ <div class="text-center">
 
-<%= render 'form' %>
 
-<%= link_to 'Show', @cocktail %> |
-<%= link_to 'Back', cocktails_path %>
+  <h1>Editing Cocktail</h1>
+
+<!-- f refers to the form of @cocktail and not directly to @cocktail. To work
+with the @cocktail -> f.object and then what I need from it -->
+
+  <%= simple_form_for(@cocktail) do |f| %>
+    <%= f.error_notification %>
+    <%= f.object.errors.full_messages %>
+
+    <%= f.label :name %>
+    <%= f.text_field :name, placeholder: "name" %>
+    <%= f.fields_for :doses do |d| %>
+      <p>
+        <% unless d.object.id.nil? %>
+          <%= d.text_field :description %>
+          <!-- for the form to show the specific ingredient it has to find the obkect in the form
+          d.object and then pass it the id of the ingredient .ingredient_id -->
+          <%= d.select :ingredient_id, options_from_collection_for_select(Ingredient.all, 'id', 'name', d.object.ingredient_id) %>
+          <!-- for the dose path, the id of dose is requiered, to get it because we are in the form: d.object -->
+          <%= link_to 'Destroy', dose_path(d.object), method: :delete, data: { confirm: 'Are you sure?' } if d.object.id %>
+        <% end %>
+      </p>
+    <% end %>
+      <%= f.button :submit, class:"btn btn-primary" %>
+  <% end %>
+
+
+  <h3>Create new dose</h3>
+  <%= form_for [@cocktail, @dose] do |f| %>
+    <%= f.text_field :description %>
+    <%= f.select :ingredient_id, options_from_collection_for_select(Ingredient.all, 'id', 'name') %>
+    <%= f.button :submit, class:"btn btn-primary" %>
+  <% end %>
+
+
+  <%= link_to 'Show', @cocktail %> |
+  <%= link_to 'Back', cocktails_path %>
+</div>
