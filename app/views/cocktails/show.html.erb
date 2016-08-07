@@ -1,6 +1,11 @@
 <p id="notice"><%= notice %></p>
 
 <h1><%= @cocktail.name %></h1>
+
+<% unless @cocktail.photo.nil? %>
+  <%= image_tag @cocktail.photo.url(:standard) %>
+<% end%>
+
 <ul>
 <% @cocktail.doses.each do |dose| %>
   <li>

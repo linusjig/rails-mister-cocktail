@@ -10,5 +10,8 @@
      <%= d.select :ingredient_id, options_from_collection_for_select(Ingredient.all, 'id', 'name') %>
     </p>
   <% end %>
+    <%= f.input :photo %>
+    <%= f.input :photo_cache, as: :hidden %>
+
     <%= f.button :submit, class:"btn btn-primary" %>
 <% end %>

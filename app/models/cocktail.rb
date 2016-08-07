@@ -6,4 +6,5 @@ class Cocktail < ActiveRecord::Base
   has_many :ingredients, through: :doses
   validates :name, presence: true, uniqueness: true
   accepts_nested_attributes_for :doses
+  mount_uploader :photo, PhotoUploader
 end

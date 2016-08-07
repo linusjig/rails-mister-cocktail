@@ -1,8 +1,8 @@
-<div class="banner" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%), url('app/assets/gallery.jpg') ;">
+<div class="banner" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%), <%= image_tag('gallery.jpg') %> ;">
   <div class="banner-content">
     <h1>Cocktails</h1>
     <p>Create your own cocktail recipe</p>
-    <a class="btn btn-primary btn-lg">GET IT</a>
+    <%= link_to "New Cocktail", new_cocktail_path, :class => 'btn btn-primary'%>
   </div>
 </div>
 
@@ -13,12 +13,10 @@
 
   <h1>Listing Cocktails</h1>
 
-  <h2>Name</h2>
-
   <% @cocktails.each do |cocktail| %>
-    <h3><%= cocktail.name %></h3>
-    <%= link_to 'Show', cocktail %></td>
-    <%= link_to 'Destroy', cocktail, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <h3><%= link_to cocktail.name, cocktail %></h3>
+    <%= image_tag cocktail.photo.url(:small) %>
+    <p><%= link_to 'Destroy', cocktail, method: :delete, data: { confirm: 'Are you sure?' } %></p>
   <% end %>
 
   <br>

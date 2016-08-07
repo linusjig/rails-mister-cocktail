@@ -74,6 +74,6 @@ class CocktailsController < ApplicationController
       # were more things nested, then anothre hash would be requiered inside of the
       # array
       # if the id is not passed in the array,
-      params.require(:cocktail).permit(:name, doses_attributes: [:description, :ingredient_id, :id ])
+      params.require(:cocktail).permit(:name, :photo, :photo_cache, doses_attributes: [:description, :ingredient_id, :id ])
     end
 end

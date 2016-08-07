@@ -16,7 +16,7 @@ with the @cocktail -> f.object and then what I need from it -->
       <p>
         <% unless d.object.id.nil? %>
           <%= d.text_field :description %>
-          <!-- for the form to show the specific ingredient it has to find the obkect in the form
+          <!-- for the form to show the specific ingredient it has to find the object in the form
           d.object and then pass it the id of the ingredient .ingredient_id -->
           <%= d.select :ingredient_id, options_from_collection_for_select(Ingredient.all, 'id', 'name', d.object.ingredient_id) %>
           <!-- for the dose path, the id of dose is requiered, to get it because we are in the form: d.object -->
@@ -24,6 +24,9 @@ with the @cocktail -> f.object and then what I need from it -->
         <% end %>
       </p>
     <% end %>
+      <%= image_tag f.object.photo.url(:small) %>
+      <%= f.input :photo, label: 'Change your photo' %>
+      <%= f.input :photo_cache, as: :hidden %>
       <%= f.button :submit, class:"btn btn-primary" %>
   <% end %>
 
